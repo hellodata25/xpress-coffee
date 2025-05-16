@@ -17,7 +17,7 @@ import { z } from "zod";
 import Header from "@/components/Header";
 import Footer from "@/components/Footer";
 import { useNavigate } from "react-router-dom";
-import { CreditCard, PayPal, Check } from "lucide-react";
+import { CreditCard, CreditCardIcon, Check } from "lucide-react";
 
 // Define the form schema
 const formSchema = z.object({
@@ -230,7 +230,7 @@ const Checkout = () => {
                                 }`}>
                                   {selectedPaymentMethod === "paypal" && <Check className="h-4 w-4" />}
                                 </div>
-                                <PayPal className="h-5 w-5" />
+                                <CreditCardIcon className="h-5 w-5" />
                                 <span className="font-medium">PayPal</span>
                               </div>
                               
