@@ -15,7 +15,7 @@ const SimpleCTA = () => {
             Experience the Rich Flavor of Xpress Coffee Today
           </h2>
           <p className="text-lg opacity-90 mb-8">
-            From bean to cup, we're passionate about delivering the finest coffee experience. 
+            From bean to cup, we're passionate about delivering Africa's finest coffee experience. 
             Order now and taste the difference.
           </p>
           <div className="flex flex-col sm:flex-row gap-4 justify-center">
@@ -31,7 +31,7 @@ const SimpleCTA = () => {
               className="border-white text-white hover:bg-gray-800 text-lg h-12 px-8" 
               size="lg"
             >
-              Join Our Coffee Club
+              Join Our African Coffee Club
             </Button>
           </div>
         </div>
