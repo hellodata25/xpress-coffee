@@ -1,5 +1,6 @@
 
 import { Button } from "@/components/ui/button";
+import { Link } from "react-router-dom";
 
 const SimpleCTA = () => {
   return (
@@ -14,10 +15,18 @@ const SimpleCTA = () => {
             Order now and taste the difference.
           </p>
           <div className="flex flex-col sm:flex-row gap-4 justify-center">
-            <Button className="bg-cream hover:bg-white text-coffee-700 text-lg h-12 px-8" size="lg">
-              Order Now
+            <Button 
+              className="bg-cream hover:bg-white text-coffee-700 text-lg h-12 px-8" 
+              size="lg"
+              asChild
+            >
+              <Link to="/shop">Order Now</Link>
             </Button>
-            <Button variant="outline" className="border-white text-white hover:bg-coffee-600 text-lg h-12 px-8" size="lg">
+            <Button 
+              variant="outline" 
+              className="border-white text-white hover:bg-coffee-600 text-lg h-12 px-8" 
+              size="lg"
+            >
               Join Our Coffee Club
             </Button>
           </div>
