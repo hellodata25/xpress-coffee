@@ -4,14 +4,13 @@ import { Badge } from "@/components/ui/badge";
 import { Button } from "@/components/ui/button";
 import Header from "@/components/Header";
 import Footer from "@/components/Footer";
-import { ShoppingCart } from "lucide-react";
+import { ShoppingCart, Coffee, Bean } from "lucide-react";
 
 // Define coffee types and their categories
 type CoffeeProduct = {
   id: number;
   name: string;
   price: number;
-  image: string;
   category: string;
   isPopular?: boolean;
 };
@@ -32,7 +31,6 @@ const coffeeProducts: CoffeeProduct[] = [
     id: 1,
     name: "Flat White",
     price: 38,
-    image: "https://images.unsplash.com/photo-1582562124811-c09040d0a901?ixlib=rb-1.2.1&auto=format&fit=crop&w=800&q=80",
     category: "Hot Coffee",
     isPopular: true,
   },
@@ -40,7 +38,6 @@ const coffeeProducts: CoffeeProduct[] = [
     id: 2,
     name: "Cortado",
     price: 35,
-    image: "https://images.unsplash.com/photo-1618160702438-9b02ab6515c9?ixlib=rb-1.2.1&auto=format&fit=crop&w=800&q=80",
     category: "Hot Coffee",
     isPopular: true,
   },
@@ -48,7 +45,6 @@ const coffeeProducts: CoffeeProduct[] = [
     id: 3,
     name: "Cappuccino",
     price: 40,
-    image: "https://images.unsplash.com/photo-1582562124811-c09040d0a901?ixlib=rb-1.2.1&auto=format&fit=crop&w=800&q=80",
     category: "Hot Coffee",
     isPopular: true,
   },
@@ -56,7 +52,6 @@ const coffeeProducts: CoffeeProduct[] = [
     id: 4,
     name: "Americano",
     price: 30,
-    image: "https://images.unsplash.com/photo-1500673922987-e212871fec22?ixlib=rb-1.2.1&auto=format&fit=crop&w=800&q=80",
     category: "Hot Coffee",
     isPopular: true,
   },
@@ -64,28 +59,24 @@ const coffeeProducts: CoffeeProduct[] = [
     id: 5,
     name: "Cold Brew",
     price: 45,
-    image: "https://images.unsplash.com/photo-1618160702438-9b02ab6515c9?ixlib=rb-1.2.1&auto=format&fit=crop&w=800&q=80",
     category: "Cold Coffee",
   },
   {
     id: 6,
     name: "Iced Latte",
     price: 42,
-    image: "https://images.unsplash.com/photo-1582562124811-c09040d0a901?ixlib=rb-1.2.1&auto=format&fit=crop&w=800&q=80",
     category: "Cold Coffee",
   },
   {
     id: 7,
-    name: "Cape Mountain Blend",
+    name: "House Blend",
     price: 129,
-    image: "https://images.unsplash.com/photo-1500673922987-e212871fec22?ixlib=rb-1.2.1&auto=format&fit=crop&w=800&q=80",
     category: "Coffee Beans",
   },
   {
     id: 8,
-    name: "Johannesburg Morning",
+    name: "Single Origin",
     price: 149,
-    image: "https://images.unsplash.com/photo-1506744038136-46273834b3fb?ixlib=rb-1.2.1&auto=format&fit=crop&w=800&q=80",
     category: "Coffee Beans",
   },
 ];
@@ -109,10 +100,10 @@ const Shop = () => {
       
       <main className="flex-grow">
         {/* Shop Hero Banner */}
-        <div className="bg-coffee-700 text-white py-8">
+        <div className="bg-black text-white py-8">
           <div className="container mx-auto px-4">
             <h1 className="font-serif text-3xl md:text-4xl font-bold">Coffee Shop</h1>
-            <p className="mt-2 text-cream opacity-90">Discover our premium coffee selection</p>
+            <p className="mt-2 text-gray-200 opacity-90">Discover our premium coffee selection</p>
           </div>
         </div>
         
@@ -126,8 +117,8 @@ const Shop = () => {
                     key={category}
                     variant={selectedCategory === category ? "default" : "outline"}
                     className={selectedCategory === category 
-                      ? "bg-coffee-500 text-white" 
-                      : "border-coffee-300 text-coffee-700"}
+                      ? "bg-black text-white" 
+                      : "border-gray-300 text-gray-700"}
                     onClick={() => setSelectedCategory(category)}
                   >
                     {category}
@@ -139,7 +130,7 @@ const Shop = () => {
         </div>
         
         {/* Products Grid */}
-        <section className="py-8 bg-cream">
+        <section className="py-8 bg-gray-50">
           <div className="container mx-auto px-4">
             <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-2 gap-6">
               {filteredProducts.map((product) => (
@@ -148,25 +139,25 @@ const Shop = () => {
                   className="bg-white rounded-lg overflow-hidden shadow"
                 >
                   <div className="flex flex-row">
-                    <div className="w-1/2">
-                      <img 
-                        src={product.image} 
-                        alt={product.name}
-                        className="w-full h-full object-cover aspect-square"
-                      />
+                    <div className="w-1/2 flex items-center justify-center bg-gray-100 p-4">
+                      {product.category === "Coffee Beans" ? (
+                        <Bean className="h-24 w-24 text-gray-600" />
+                      ) : (
+                        <Coffee className="h-24 w-24 text-gray-600" />
+                      )}
                     </div>
                     <div className="w-1/2 p-4 flex flex-col justify-between">
                       <div>
                         {product.isPopular && (
-                          <Badge className="bg-terracotta-500 mb-2">Popular</Badge>
+                          <Badge className="bg-black mb-2">Popular</Badge>
                         )}
-                        <h3 className="text-xl font-semibold text-coffee-700">{product.name}</h3>
+                        <h3 className="text-xl font-semibold">{product.name}</h3>
                       </div>
                       <div className="flex justify-between items-center mt-4">
                         <span className="text-xl font-bold">R{product.price}</span>
                         <Button 
                           size="sm" 
-                          className="bg-coffee-500 hover:bg-coffee-600"
+                          className="bg-black hover:bg-gray-800"
                           onClick={addToCart}
                         >
                           <ShoppingCart className="h-4 w-4" />
@@ -183,7 +174,7 @@ const Shop = () => {
         {/* View Cart Sticky Button */}
         {cartItems > 0 && (
           <div className="fixed bottom-6 left-1/2 transform -translate-x-1/2 z-50">
-            <Button className="bg-coffee-600 hover:bg-coffee-700 px-8 py-6 text-white shadow-lg">
+            <Button className="bg-black hover:bg-gray-800 px-8 py-6 text-white shadow-lg">
               View order ({cartItems} {cartItems === 1 ? 'item' : 'items'})
             </Button>
           </div>
