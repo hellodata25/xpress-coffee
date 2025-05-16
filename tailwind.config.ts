@@ -1,3 +1,4 @@
+
 import type { Config } from "tailwindcss";
 
 export default {
@@ -61,7 +62,26 @@ export default {
 					'accent-foreground': 'hsl(var(--sidebar-accent-foreground))',
 					border: 'hsl(var(--sidebar-border))',
 					ring: 'hsl(var(--sidebar-ring))'
-				}
+				},
+				coffee: {
+					'100': '#f5f0e5',
+					'200': '#e6d7c3',
+					'300': '#d2b48c',
+					'400': '#c19a6b',
+					'500': '#8b5a2b',
+					'600': '#704214',
+					'700': '#5c370f',
+					'800': '#4e2c0d',
+				},
+				terracotta: {
+					'100': '#f9e8e1',
+					'200': '#f3d1c3',
+					'300': '#e8b4a0',
+					'400': '#d9937a',
+					'500': '#c87251',
+					'600': '#b25a3a',
+				},
+				cream: '#f9f5eb'
 			},
 			borderRadius: {
 				lg: 'var(--radius)',
@@ -84,11 +104,20 @@ export default {
 					to: {
 						height: '0'
 					}
+				},
+				'fade-in': {
+					from: { opacity: '0' },
+					to: { opacity: '1' }
 				}
 			},
 			animation: {
 				'accordion-down': 'accordion-down 0.2s ease-out',
-				'accordion-up': 'accordion-up 0.2s ease-out'
+				'accordion-up': 'accordion-up 0.2s ease-out',
+				'fade-in': 'fade-in 0.5s ease-in-out'
+			},
+			fontFamily: {
+				sans: ['Poppins', 'sans-serif'],
+				serif: ['Merriweather', 'serif']
 			}
 		}
 	},
