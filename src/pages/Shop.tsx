@@ -5,6 +5,7 @@ import { Button } from "@/components/ui/button";
 import Header from "@/components/Header";
 import Footer from "@/components/Footer";
 import { ShoppingCart, Coffee, Bean } from "lucide-react";
+import { Link } from "react-router-dom";
 
 // Define coffee types and their categories
 type CoffeeProduct = {
@@ -174,8 +175,13 @@ const Shop = () => {
         {/* View Cart Sticky Button */}
         {cartItems > 0 && (
           <div className="fixed bottom-6 left-1/2 transform -translate-x-1/2 z-50">
-            <Button className="bg-black hover:bg-gray-800 px-8 py-6 text-white shadow-lg">
-              View order ({cartItems} {cartItems === 1 ? 'item' : 'items'})
+            <Button 
+              className="bg-black hover:bg-gray-800 px-8 py-6 text-white shadow-lg"
+              asChild
+            >
+              <Link to="/checkout">
+                View order ({cartItems} {cartItems === 1 ? 'item' : 'items'})
+              </Link>
             </Button>
           </div>
         )}

@@ -11,7 +11,7 @@ const Footer = () => {
           <div>
             <div className="flex items-center gap-2 mb-4">
               <Coffee className="h-6 w-6" />
-              <span className="font-serif text-xl font-bold">Kaffeewelt</span>
+              <span className="font-serif text-xl font-bold">Xpress Coffee</span>
             </div>
             <p className="text-sm opacity-80 max-w-xs">
               South Africa's premier coffee ordering platform, bringing the finest local beans straight to your doorstep.
@@ -33,7 +33,7 @@ const Footer = () => {
             <ul className="space-y-3 text-sm">
               <li>123 Coffee Street</li>
               <li>Cape Town, South Africa</li>
-              <li>info@kaffeewelt.co.za</li>
+              <li>info@xpresscoffee.co.za</li>
               <li>+27 21 123 4567</li>
             </ul>
           </div>
@@ -50,7 +50,7 @@ const Footer = () => {
         
         <div className="border-t border-cream/20 mt-8 pt-8 flex flex-col md:flex-row justify-between items-center">
           <p className="text-sm opacity-80">
-            &copy; {currentYear} Kaffeewelt. All rights reserved.
+            &copy; {currentYear} Xpress Coffee. All rights reserved.
           </p>
           <div className="flex gap-4 mt-4 md:mt-0">
             <a href="#" aria-label="Facebook" className="hover:text-terracotta-300 transition-colors">
