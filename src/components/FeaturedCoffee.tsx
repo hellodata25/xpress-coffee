@@ -3,116 +3,120 @@ import { useState } from "react";
 import { Button } from "@/components/ui/button";
 import { Card, CardContent, CardFooter, CardHeader } from "@/components/ui/card";
 import { Badge } from "@/components/ui/badge";
-import { ShoppingCart } from "lucide-react";
+import { ShoppingCart, Coffee, CupSoda, Croissant } from "lucide-react";
+import { Link } from "react-router-dom";
 
 // Define a type for our coffee products
 type CoffeeProduct = {
   id: number;
   name: string;
-  origin: string;
+  category: string;
   description: string;
   price: number;
-  image: string;
-  roastLevel: string;
+  icon: "coffee" | "cup-soda" | "croissant";
   isPopular?: boolean;
-  isBestSeller?: boolean;
-  isOrganic?: boolean;
+  isNew?: boolean;
+  isVegan?: boolean;
 };
 
-const coffeeProducts: CoffeeProduct[] = [
+const featuredProducts: CoffeeProduct[] = [
   {
-    id: 1,
-    name: "Cape Mountain Blend",
-    origin: "Western Cape",
-    description: "A medium roast with notes of chocolate, caramel and a hint of citrus.",
-    price: 129,
-    image: "https://images.unsplash.com/photo-1618160702438-9b02ab6515c9?ixlib=rb-1.2.1&auto=format&fit=crop&w=800&q=80",
-    roastLevel: "Medium",
-    isBestSeller: true
-  },
-  {
-    id: 2,
-    name: "Johannesburg Morning",
-    origin: "Gauteng",
-    description: "Strong and bold dark roast with earthy undertones and a smooth finish.",
-    price: 149,
-    image: "https://images.unsplash.com/photo-1582562124811-c09040d0a901?ixlib=rb-1.2.1&auto=format&fit=crop&w=800&q=80",
-    roastLevel: "Dark",
+    id: 3,
+    name: "Cappuccino",
+    category: "Hot Coffee",
+    description: "Espresso with steamed milk and foam",
+    price: 40,
+    icon: "coffee",
     isPopular: true
   },
   {
-    id: 3,
-    name: "Durban Coast",
-    origin: "KwaZulu-Natal",
-    description: "Light roast with bright acidity and tropical fruit notes.",
-    price: 139,
-    image: "https://images.unsplash.com/photo-1500673922987-e212871fec22?ixlib=rb-1.2.1&auto=format&fit=crop&w=800&q=80",
-    roastLevel: "Light",
-    isOrganic: true
+    id: 21,
+    name: "Red Cappuccino",
+    category: "Hot Coffee",
+    description: "Rooibos tea cappuccino with frothy milk",
+    price: 30,
+    icon: "coffee",
+    isPopular: true
   },
   {
-    id: 4,
-    name: "Stellenbosch Reserve",
-    origin: "Western Cape",
-    description: "Premium medium-dark roast with rich chocolate and berry notes.",
-    price: 169,
-    image: "https://images.unsplash.com/photo-1506744038136-46273834b3fb?ixlib=rb-1.2.1&auto=format&fit=crop&w=800&q=80",
-    roastLevel: "Medium-Dark",
-    isPopular: true,
-    isOrganic: true
+    id: 5,
+    name: "Cold Brew",
+    category: "Cold Coffee",
+    description: "Coffee steeped in cold water for 12+ hours",
+    price: 45,
+    icon: "cup-soda"
+  },
+  {
+    id: 16,
+    name: "Almond Croissant",
+    category: "Freshly Baked Goods",
+    description: "Croissant filled with almond cream and flakes",
+    price: 50,
+    icon: "croissant",
+    isPopular: true
   }
 ];
 
 const FeaturedCoffee = () => {
-  const [products] = useState<CoffeeProduct[]>(coffeeProducts);
+  const [products] = useState<CoffeeProduct[]>(featuredProducts);
+
+  // Function to render the appropriate icon
+  const renderIcon = (iconName: CoffeeProduct["icon"]) => {
+    switch(iconName) {
+      case "coffee":
+        return <Coffee className="h-24 w-24 text-gray-600" />;
+      case "cup-soda":
+        return <CupSoda className="h-24 w-24 text-gray-600" />;
+      case "croissant":
+        return <Croissant className="h-24 w-24 text-gray-600" />;
+      default:
+        return <Coffee className="h-24 w-24 text-gray-600" />;
+    }
+  };
 
   return (
-    <section className="py-16 bg-cream">
+    <section className="py-16 bg-gray-50">
       <div className="container mx-auto px-4 md:px-6">
         <div className="text-center mb-12">
-          <h2 className="text-3xl md:text-4xl font-bold text-coffee-700 mb-4">Featured Coffee</h2>
-          <p className="text-coffee-600 max-w-2xl mx-auto">
-            Discover our hand-selected range of premium South African coffee beans, expertly roasted for your enjoyment.
+          <h2 className="text-3xl md:text-4xl font-bold text-black mb-4">Featured Products</h2>
+          <p className="text-gray-700 max-w-2xl mx-auto">
+            Discover our most popular coffee and baked goods, available in our shop.
           </p>
         </div>
 
         <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-4 gap-6">
-          {products.map((coffee) => (
-            <Card key={coffee.id} className="overflow-hidden bg-white border-coffee-200 hover:shadow-md transition-all">
-              <div className="aspect-square relative overflow-hidden">
-                <img 
-                  src={coffee.image} 
-                  alt={coffee.name}
-                  className="object-cover w-full h-full transition-all duration-300 hover:scale-105"
-                />
+          {products.map((product) => (
+            <Card key={product.id} className="overflow-hidden bg-white border border-gray-200 hover:shadow-md transition-all">
+              <div className="aspect-square relative overflow-hidden flex items-center justify-center bg-gray-100 p-4">
+                {renderIcon(product.icon)}
                 <div className="absolute top-3 left-3 flex flex-col gap-2">
-                  {coffee.isBestSeller && (
-                    <Badge className="bg-terracotta-500">Best Seller</Badge>
+                  {product.isPopular && (
+                    <Badge className="bg-black">Popular</Badge>
                   )}
-                  {coffee.isPopular && (
-                    <Badge className="bg-coffee-500">Popular</Badge>
+                  {product.isNew && (
+                    <Badge className="bg-blue-500">New</Badge>
                   )}
-                  {coffee.isOrganic && (
-                    <Badge className="bg-green-600">Organic</Badge>
+                  {product.isVegan && (
+                    <Badge className="bg-green-500">Vegan</Badge>
                   )}
                 </div>
               </div>
               <CardHeader className="py-4">
                 <div className="flex justify-between items-start">
                   <div>
-                    <h3 className="font-serif font-bold text-lg text-coffee-700">{coffee.name}</h3>
-                    <p className="text-sm text-coffee-500">{coffee.origin} • {coffee.roastLevel} Roast</p>
+                    <h3 className="font-semibold text-lg text-black">{product.name}</h3>
+                    <p className="text-sm text-gray-500">{product.category}</p>
                   </div>
                   <div className="text-right font-bold text-lg">
-                    R{coffee.price}
+                    R{product.price}
                   </div>
                 </div>
               </CardHeader>
               <CardContent className="py-2">
-                <p className="text-sm text-coffee-600 line-clamp-2">{coffee.description}</p>
+                <p className="text-sm text-gray-600 line-clamp-2">{product.description}</p>
               </CardContent>
               <CardFooter className="pt-2 pb-4">
-                <Button className="w-full bg-coffee-500 hover:bg-coffee-600">
+                <Button className="w-full bg-black hover:bg-gray-800">
                   <ShoppingCart className="mr-2 h-4 w-4" /> Add to Cart
                 </Button>
               </CardFooter>
@@ -121,8 +125,8 @@ const FeaturedCoffee = () => {
         </div>
 
         <div className="text-center mt-12">
-          <Button variant="outline" className="border-coffee-400 text-coffee-600 hover:bg-coffee-100 text-lg h-12 px-6">
-            View All Coffees
+          <Button className="bg-black hover:bg-gray-800 text-lg h-12 px-6" asChild>
+            <Link to="/shop">View All Products</Link>
           </Button>
         </div>
       </div>
