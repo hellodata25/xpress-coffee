@@ -1,4 +1,3 @@
-
 import { useState } from "react";
 import { Badge } from "@/components/ui/badge";
 import { Button } from "@/components/ui/button";
@@ -23,7 +22,6 @@ type CoffeeProduct = {
 // Categories displayed in the horizontal scrolling menu
 const categories = [
   "All Products",
-  "Signature Coffees",
   "Hot Coffee",
   "Cold Coffee",
   "Freshly Baked Goods",
@@ -33,12 +31,12 @@ const categories = [
 
 // Sample products for the shop page
 const coffeeProducts: CoffeeProduct[] = [
-  // New Signature Coffees
+  // Hot Coffee - Including moved items from Signature Coffees
   {
     id: 19,
     name: "Espresso",
     price: 20,
-    category: "Signature Coffees",
+    category: "Hot Coffee",
     description: "Strong concentrated coffee served in a small cup",
     icon: "coffee"
   },
@@ -46,7 +44,7 @@ const coffeeProducts: CoffeeProduct[] = [
     id: 20,
     name: "Americano",
     price: 25,
-    category: "Signature Coffees",
+    category: "Hot Coffee",
     description: "Espresso diluted with hot water",
     icon: "coffee"
   },
@@ -54,24 +52,16 @@ const coffeeProducts: CoffeeProduct[] = [
     id: 21,
     name: "Red Cappuccino",
     price: 30,
-    category: "Signature Coffees",
+    category: "Hot Coffee",
     description: "Rooibos tea cappuccino with frothy milk",
     isPopular: true,
-    icon: "coffee"
-  },
-  {
-    id: 22,
-    name: "Cappuccino",
-    price: 30,
-    category: "Signature Coffees",
-    description: "Equal parts espresso, steamed milk, and milk foam",
     icon: "coffee"
   },
   {
     id: 23,
     name: "Latte",
     price: 35,
-    category: "Signature Coffees",
+    category: "Hot Coffee",
     description: "Espresso with steamed milk and a light layer of foam",
     icon: "coffee"
   },
@@ -79,11 +69,10 @@ const coffeeProducts: CoffeeProduct[] = [
     id: 24,
     name: "Mocha",
     price: 40,
-    category: "Signature Coffees",
+    category: "Hot Coffee",
     description: "Espresso with chocolate and steamed milk",
     icon: "coffee"
   },
-
   {
     id: 1,
     name: "Flat White",
@@ -120,7 +109,7 @@ const coffeeProducts: CoffeeProduct[] = [
     isPopular: true,
     icon: "coffee"
   },
-  // Moved Specialty Drinks to Hot Coffee category
+  // Other Hot Coffee items (formerly Specialty Drinks)
   {
     id: 9,
     name: "Matcha Latte",
