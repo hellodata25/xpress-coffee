@@ -1,10 +1,9 @@
-
 import { useState } from "react";
 import { Badge } from "@/components/ui/badge";
 import { Button } from "@/components/ui/button";
 import Header from "@/components/Header";
 import Footer from "@/components/Footer";
-import { ShoppingCart, Coffee, CupSoda, Croissant, LeafyGreen, TeaCup } from "lucide-react";
+import { ShoppingCart, Coffee, CupSoda, Croissant, LeafyGreen } from "lucide-react";
 import { Link } from "react-router-dom";
 
 // Define coffee types and their categories
@@ -17,7 +16,7 @@ type CoffeeProduct = {
   isPopular?: boolean;
   isNew?: boolean;
   isVegan?: boolean;
-  icon: "coffee" | "cup-soda" | "croissant" | "leafy-green" | "tea-cup";
+  icon: "coffee" | "cup-soda" | "croissant" | "leafy-green";
 };
 
 // Categories displayed in the horizontal scrolling menu
@@ -108,7 +107,7 @@ const coffeeProducts: CoffeeProduct[] = [
     category: "Specialty Drinks",
     description: "Premium matcha whisked with steamed milk",
     isNew: true,
-    icon: "tea-cup"
+    icon: "cup-soda"
   },
   {
     id: 10,
@@ -116,7 +115,7 @@ const coffeeProducts: CoffeeProduct[] = [
     price: 25,
     category: "Specialty Drinks",
     description: "Selection of loose leaf teas",
-    icon: "tea-cup"
+    icon: "cup-soda"
   },
   {
     id: 11,
@@ -124,7 +123,7 @@ const coffeeProducts: CoffeeProduct[] = [
     price: 40,
     category: "Specialty Drinks",
     description: "Aromatic chai tea with steamed milk",
-    icon: "tea-cup"
+    icon: "cup-soda"
   },
   {
     id: 12,
@@ -133,7 +132,7 @@ const coffeeProducts: CoffeeProduct[] = [
     category: "Specialty Drinks",
     description: "Golden milk with anti-inflammatory properties",
     isVegan: true,
-    icon: "tea-cup"
+    icon: "cup-soda"
   },
   {
     id: 13,
@@ -210,8 +209,6 @@ const Shop = () => {
         return <Croissant className="h-24 w-24 text-gray-600" />;
       case "leafy-green":
         return <LeafyGreen className="h-24 w-24 text-gray-600" />;
-      case "tea-cup":
-        return <TeaCup className="h-24 w-24 text-gray-600" />;
       default:
         return <Coffee className="h-24 w-24 text-gray-600" />;
     }
