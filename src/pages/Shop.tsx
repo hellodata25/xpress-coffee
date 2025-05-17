@@ -22,6 +22,7 @@ type CoffeeProduct = {
 // Categories displayed in the horizontal scrolling menu
 const categories = [
   "All Products",
+  "Signature Coffees",
   "Hot Coffee",
   "Cold Coffee",
   "Specialty Drinks",
@@ -32,6 +33,57 @@ const categories = [
 
 // Sample products for the shop page
 const coffeeProducts: CoffeeProduct[] = [
+  // New Signature Coffees
+  {
+    id: 19,
+    name: "Espresso",
+    price: 20,
+    category: "Signature Coffees",
+    description: "Strong concentrated coffee served in a small cup",
+    icon: "coffee"
+  },
+  {
+    id: 20,
+    name: "Americano",
+    price: 25,
+    category: "Signature Coffees",
+    description: "Espresso diluted with hot water",
+    icon: "coffee"
+  },
+  {
+    id: 21,
+    name: "Red Cappuccino",
+    price: 30,
+    category: "Signature Coffees",
+    description: "Rooibos tea cappuccino with frothy milk",
+    isPopular: true,
+    icon: "coffee"
+  },
+  {
+    id: 22,
+    name: "Cappuccino",
+    price: 30,
+    category: "Signature Coffees",
+    description: "Equal parts espresso, steamed milk, and milk foam",
+    icon: "coffee"
+  },
+  {
+    id: 23,
+    name: "Latte",
+    price: 35,
+    category: "Signature Coffees",
+    description: "Espresso with steamed milk and a light layer of foam",
+    icon: "coffee"
+  },
+  {
+    id: 24,
+    name: "Mocha",
+    price: 40,
+    category: "Signature Coffees",
+    description: "Espresso with chocolate and steamed milk",
+    icon: "coffee"
+  },
+
   {
     id: 1,
     name: "Flat White",
