@@ -1,3 +1,4 @@
+
 import { useState } from "react";
 import { Badge } from "@/components/ui/badge";
 import { Button } from "@/components/ui/button";
@@ -25,7 +26,6 @@ const categories = [
   "Signature Coffees",
   "Hot Coffee",
   "Cold Coffee",
-  "Specialty Drinks",
   "Freshly Baked Goods",
   "Coffee Beans",
   "Brewing Equipment"
@@ -120,6 +120,49 @@ const coffeeProducts: CoffeeProduct[] = [
     isPopular: true,
     icon: "coffee"
   },
+  // Moved Specialty Drinks to Hot Coffee category
+  {
+    id: 9,
+    name: "Matcha Latte",
+    price: 45,
+    category: "Hot Coffee",
+    description: "Premium matcha whisked with steamed milk",
+    isNew: true,
+    icon: "cup-soda"
+  },
+  {
+    id: 10,
+    name: "Artisanal Tea",
+    price: 25,
+    category: "Hot Coffee",
+    description: "Selection of loose leaf teas",
+    icon: "cup-soda"
+  },
+  {
+    id: 11,
+    name: "Spiced Chai",
+    price: 40,
+    category: "Hot Coffee",
+    description: "Aromatic chai tea with steamed milk",
+    icon: "cup-soda"
+  },
+  {
+    id: 12,
+    name: "Turmeric Latte",
+    price: 40,
+    category: "Hot Coffee",
+    description: "Golden milk with anti-inflammatory properties",
+    isVegan: true,
+    icon: "cup-soda"
+  },
+  {
+    id: 13,
+    name: "Hot Chocolate",
+    price: 40,
+    category: "Hot Coffee",
+    description: "Rich and creamy chocolate with steamed milk",
+    icon: "cup-soda"
+  },
   {
     id: 5,
     name: "Cold Brew",
@@ -151,48 +194,6 @@ const coffeeProducts: CoffeeProduct[] = [
     category: "Coffee Beans",
     description: "Ethiopian beans with fruity notes",
     icon: "coffee"
-  },
-  {
-    id: 9,
-    name: "Matcha Latte",
-    price: 45,
-    category: "Specialty Drinks",
-    description: "Premium matcha whisked with steamed milk",
-    isNew: true,
-    icon: "cup-soda"
-  },
-  {
-    id: 10,
-    name: "Artisanal Tea",
-    price: 25,
-    category: "Specialty Drinks",
-    description: "Selection of loose leaf teas",
-    icon: "cup-soda"
-  },
-  {
-    id: 11,
-    name: "Spiced Chai",
-    price: 40,
-    category: "Specialty Drinks",
-    description: "Aromatic chai tea with steamed milk",
-    icon: "cup-soda"
-  },
-  {
-    id: 12,
-    name: "Turmeric Latte",
-    price: 40,
-    category: "Specialty Drinks",
-    description: "Golden milk with anti-inflammatory properties",
-    isVegan: true,
-    icon: "cup-soda"
-  },
-  {
-    id: 13,
-    name: "Hot Chocolate",
-    price: 40,
-    category: "Specialty Drinks",
-    description: "Rich and creamy chocolate with steamed milk",
-    icon: "cup-soda"
   },
   {
     id: 14,
