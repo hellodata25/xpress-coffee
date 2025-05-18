@@ -1,5 +1,6 @@
 
 import { Button } from "@/components/ui/button";
+import { Coffee, MugSteaming, Wheat, Map } from "lucide-react";
 
 const AboutSection = () => {
   return (
@@ -12,7 +13,7 @@ const AboutSection = () => {
               South Africa has a rich and vibrant coffee culture that has been growing rapidly in recent years. From the bustling cafes of Cape Town to the artisanal roasters in Johannesburg, our country is producing some of the world's most exciting coffee.
             </p>
             <p className="text-coffee-600 mb-6">
-              At Kaffeewelt, we're passionate about promoting local South African coffee producers. We work directly with small-scale farmers and roasters to bring you the freshest, most ethically sourced beans possible.
+              At Xpress Coffee, we're passionate about promoting local South African coffee producers. We work directly with small-scale farmers and roasters to bring you the freshest, most ethically sourced beans possible.
             </p>
             
             <div className="grid grid-cols-2 gap-4 mb-8">
@@ -41,28 +42,20 @@ const AboutSection = () => {
           
           <div className="grid grid-cols-2 gap-4">
             <div className="space-y-4">
-              <img 
-                src="https://images.unsplash.com/photo-1506744038136-46273834b3fb?ixlib=rb-1.2.1&auto=format&fit=crop&w=600&q=80" 
-                alt="Coffee farm" 
-                className="rounded-lg h-48 w-full object-cover"
-              />
-              <img 
-                src="https://images.unsplash.com/photo-1582562124811-c09040d0a901?ixlib=rb-1.2.1&auto=format&fit=crop&w=600&q=80" 
-                alt="Coffee beans" 
-                className="rounded-lg h-64 w-full object-cover"
-              />
+              <div className="rounded-lg h-48 w-full bg-gray-100 flex items-center justify-center">
+                <Coffee className="h-24 w-24 text-gray-600" />
+              </div>
+              <div className="rounded-lg h-64 w-full bg-gray-100 flex items-center justify-center">
+                <Wheat className="h-24 w-24 text-gray-600" />
+              </div>
             </div>
             <div className="space-y-4 pt-6">
-              <img 
-                src="https://images.unsplash.com/photo-1618160702438-9b02ab6515c9?ixlib=rb-1.2.1&auto=format&fit=crop&w=600&q=80" 
-                alt="Coffee brewing" 
-                className="rounded-lg h-64 w-full object-cover"
-              />
-              <img 
-                src="https://images.unsplash.com/photo-1500673922987-e212871fec22?ixlib=rb-1.2.1&auto=format&fit=crop&w=600&q=80" 
-                alt="South African landscape" 
-                className="rounded-lg h-48 w-full object-cover"
-              />
+              <div className="rounded-lg h-64 w-full bg-gray-100 flex items-center justify-center">
+                <MugSteaming className="h-24 w-24 text-gray-600" />
+              </div>
+              <div className="rounded-lg h-48 w-full bg-gray-100 flex items-center justify-center">
+                <Map className="h-24 w-24 text-gray-600" />
+              </div>
             </div>
           </div>
         </div>

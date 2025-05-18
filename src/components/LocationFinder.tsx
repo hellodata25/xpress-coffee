@@ -18,7 +18,7 @@ type Location = {
 const locations: Location[] = [
   {
     id: 1,
-    name: "Kaffeewelt Cape Town",
+    name: "Xpress Coffee Cape Town",
     address: "123 Long Street",
     city: "Cape Town",
     phoneNumber: "021 123 4567",
@@ -27,7 +27,7 @@ const locations: Location[] = [
   },
   {
     id: 2,
-    name: "Kaffeewelt Johannesburg",
+    name: "Xpress Coffee Johannesburg",
     address: "456 Jan Smuts Avenue",
     city: "Johannesburg",
     phoneNumber: "011 987 6543",
@@ -36,7 +36,7 @@ const locations: Location[] = [
   },
   {
     id: 3,
-    name: "Kaffeewelt Durban",
+    name: "Xpress Coffee Durban",
     address: "789 Florida Road",
     city: "Durban",
     phoneNumber: "031 345 6789",
@@ -45,12 +45,21 @@ const locations: Location[] = [
   },
   {
     id: 4,
-    name: "Kaffeewelt Stellenbosch",
+    name: "Xpress Coffee Stellenbosch",
     address: "101 Dorp Street",
     city: "Stellenbosch",
     phoneNumber: "021 765 4321",
     hours: "8am - 6pm",
     distance: "7.8 km"
+  },
+  {
+    id: 5,
+    name: "Xpress Coffee Sandton",
+    address: "25 Fredman Drive",
+    city: "Johannesburg",
+    phoneNumber: "011 883 9921",
+    hours: "7am - 7pm",
+    distance: "4.3 km"
   }
 ];
 
@@ -96,7 +105,7 @@ const LocationFinder = () => {
                 <MapPin className="h-12 w-12 text-coffee-500 mx-auto mb-4" />
                 <h3 className="text-xl font-bold text-coffee-700 mb-2">Interactive Map</h3>
                 <p className="text-coffee-600">
-                  This would be an interactive map in a real implementation. For now, please use the location list to find the nearest Kaffeewelt.
+                  This would be an interactive map in a real implementation. For now, please use the location list to find the nearest Xpress Coffee.
                 </p>
               </div>
             </div>
