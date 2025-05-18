@@ -1,3 +1,4 @@
+
 import { useState } from "react";
 import { Badge } from "@/components/ui/badge";
 import { Button } from "@/components/ui/button";
@@ -23,7 +24,7 @@ type CoffeeProduct = {
 const categories = [
   "All Products",
   "Hot Coffee",
-  "Cold Coffee",
+  "Frozen Drinks",
   "Freshly Baked Goods",
   "Coffee Beans",
   "Brewing Equipment"
@@ -152,11 +153,12 @@ const coffeeProducts: CoffeeProduct[] = [
     description: "Rich and creamy chocolate with steamed milk",
     icon: "cup-soda"
   },
+  // Frozen Drinks (renamed from Cold Coffee)
   {
     id: 5,
     name: "Cold Brew",
     price: 45,
-    category: "Cold Coffee",
+    category: "Frozen Drinks",
     description: "Coffee steeped in cold water for 12+ hours",
     icon: "cup-soda"
   },
@@ -164,8 +166,84 @@ const coffeeProducts: CoffeeProduct[] = [
     id: 6,
     name: "Iced Latte",
     price: 42,
-    category: "Cold Coffee",
+    category: "Frozen Drinks",
     description: "Espresso with cold milk over ice",
+    icon: "cup-soda"
+  },
+  // New Frozen Drinks items
+  {
+    id: 30,
+    name: "Slice n Dice Fruit Juice",
+    price: 35,
+    category: "Frozen Drinks",
+    description: "Fresh seasonal fruits blended into a refreshing juice",
+    icon: "cup-soda"
+  },
+  {
+    id: 31,
+    name: "Fresh Orange Juice",
+    price: 30,
+    category: "Frozen Drinks",
+    description: "Freshly squeezed orange juice",
+    icon: "cup-soda"
+  },
+  {
+    id: 32,
+    name: "Fresh Orange Juice + Ginger Shot",
+    price: 40,
+    category: "Frozen Drinks",
+    description: "Freshly squeezed orange juice with a zingy ginger shot",
+    isNew: true,
+    icon: "cup-soda"
+  },
+  {
+    id: 33,
+    name: "Freezo",
+    price: 45,
+    category: "Frozen Drinks",
+    description: "Our signature frozen coffee drink",
+    isPopular: true,
+    icon: "cup-soda"
+  },
+  {
+    id: 34,
+    name: "Frozen Chocolate",
+    price: 45,
+    category: "Frozen Drinks",
+    description: "Icy chocolate drink perfect for hot days",
+    icon: "cup-soda"
+  },
+  {
+    id: 35,
+    name: "Frozen Mocha",
+    price: 50,
+    category: "Frozen Drinks",
+    description: "Frozen blend of coffee and chocolate",
+    icon: "cup-soda"
+  },
+  {
+    id: 36,
+    name: "Frozen Matcha",
+    price: 50,
+    category: "Frozen Drinks",
+    description: "Premium matcha blended with ice and milk",
+    isNew: true,
+    icon: "cup-soda"
+  },
+  {
+    id: 37,
+    name: "Frozen Chai",
+    price: 45,
+    category: "Frozen Drinks",
+    description: "Chilled chai tea blended with ice and spices",
+    icon: "cup-soda"
+  },
+  {
+    id: 38,
+    name: "Frozen Americano",
+    price: 40,
+    category: "Frozen Drinks",
+    description: "Chilled americano over crushed ice",
     icon: "cup-soda"
   },
   {

@@ -39,10 +39,10 @@ const featuredProducts: CoffeeProduct[] = [
     isPopular: true
   },
   {
-    id: 5,
-    name: "Cold Brew",
-    category: "Cold Coffee",
-    description: "Coffee steeped in cold water for 12+ hours",
+    id: 33,
+    name: "Freezo",
+    category: "Frozen Drinks",
+    description: "Our signature frozen coffee drink",
     price: 45,
     icon: "cup-soda"
   },
