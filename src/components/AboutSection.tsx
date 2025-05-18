@@ -1,6 +1,6 @@
 
 import { Button } from "@/components/ui/button";
-import { Coffee, MugSteaming, Wheat, Map } from "lucide-react";
+import { Coffee, Cup, Wheat, Map } from "lucide-react";
 
 const AboutSection = () => {
   return (
@@ -51,7 +51,7 @@ const AboutSection = () => {
             </div>
             <div className="space-y-4 pt-6">
               <div className="rounded-lg h-64 w-full bg-gray-100 flex items-center justify-center">
-                <MugSteaming className="h-24 w-24 text-gray-600" />
+                <Cup className="h-24 w-24 text-gray-600" />
               </div>
               <div className="rounded-lg h-48 w-full bg-gray-100 flex items-center justify-center">
                 <Map className="h-24 w-24 text-gray-600" />
