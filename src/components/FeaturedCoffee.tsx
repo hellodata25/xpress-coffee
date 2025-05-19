@@ -75,19 +75,27 @@ const FeaturedCoffee = () => {
   };
 
   return (
-    <section className="py-16 bg-gray-50">
-      <div className="container mx-auto px-4 md:px-6">
+    <section 
+      className="py-16 relative before:content-[''] before:absolute before:inset-0 before:bg-black/40 before:z-0"
+      style={{ 
+        backgroundImage: "url('/lovable-uploads/b643d28e-71f1-40da-a612-2fa73f99d0ae.png')",
+        backgroundSize: "cover",
+        backgroundPosition: "center",
+        backgroundAttachment: "fixed"
+      }}
+    >
+      <div className="container mx-auto px-4 md:px-6 relative z-10">
         <div className="text-center mb-12">
-          <h2 className="text-3xl md:text-4xl font-bold text-black mb-4">Featured Products</h2>
-          <p className="text-gray-700 max-w-2xl mx-auto">
+          <h2 className="text-3xl md:text-4xl font-bold text-white mb-4">Featured Products</h2>
+          <p className="text-gray-200 max-w-2xl mx-auto">
             Discover our most popular coffee and baked goods, available in our shop.
           </p>
         </div>
 
         <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-4 gap-6">
           {products.map((product) => (
-            <Card key={product.id} className="overflow-hidden bg-white border border-gray-200 hover:shadow-md transition-all">
-              <div className="aspect-square relative overflow-hidden flex items-center justify-center bg-gray-100 p-4">
+            <Card key={product.id} className="overflow-hidden bg-white/95 backdrop-blur-sm border border-gray-200 hover:shadow-md transition-all">
+              <div className="aspect-square relative overflow-hidden flex items-center justify-center bg-gray-100/80 p-4">
                 {renderIcon(product.icon)}
                 <div className="absolute top-3 left-3 flex flex-col gap-2">
                   {product.isPopular && (
