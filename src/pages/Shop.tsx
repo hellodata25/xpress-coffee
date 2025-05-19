@@ -17,6 +17,7 @@ type CoffeeProduct = {
   isNew?: boolean;
   isVegan?: boolean;
   icon: "coffee" | "cup-soda" | "croissant" | "leafy-green" | "glass-water";
+  imageUrl?: string;
 };
 
 // Categories displayed in the horizontal scrolling menu
@@ -39,7 +40,8 @@ const coffeeProducts: CoffeeProduct[] = [
     price: 20,
     category: "Hot Coffee",
     description: "Strong concentrated coffee served in a small cup",
-    icon: "coffee"
+    icon: "coffee",
+    imageUrl: "/lovable-uploads/b9da5571-bf70-486c-8ec9-6c855b069dc8.png"
   },
   {
     id: 20,
@@ -472,7 +474,15 @@ const Shop = () => {
                 >
                   <div className="flex flex-row">
                     <div className="w-1/3 flex items-center justify-center bg-gray-100/80 p-4">
-                      {renderIcon(product.icon)}
+                      {product.imageUrl ? (
+                        <img 
+                          src={product.imageUrl} 
+                          alt={product.name} 
+                          className="h-24 w-24 object-cover"
+                        />
+                      ) : (
+                        renderIcon(product.icon)
+                      )}
                     </div>
                     <div className="w-2/3 p-4 flex flex-col justify-between">
                       <div>
