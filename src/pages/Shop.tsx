@@ -1,10 +1,9 @@
-
 import { useState } from "react";
 import { Badge } from "@/components/ui/badge";
 import { Button } from "@/components/ui/button";
 import Header from "@/components/Header";
 import Footer from "@/components/Footer";
-import { ShoppingCart, Coffee, CupSoda, Croissant, LeafyGreen } from "lucide-react";
+import { ShoppingCart, Coffee, CupSoda, Croissant, LeafyGreen, GlassWater } from "lucide-react";
 import { Link } from "react-router-dom";
 
 // Define coffee types and their categories
@@ -17,7 +16,7 @@ type CoffeeProduct = {
   isPopular?: boolean;
   isNew?: boolean;
   isVegan?: boolean;
-  icon: "coffee" | "cup-soda" | "croissant" | "leafy-green";
+  icon: "coffee" | "cup-soda" | "croissant" | "leafy-green" | "glass-water";
 };
 
 // Categories displayed in the horizontal scrolling menu
@@ -27,6 +26,7 @@ const categories = [
   "Frozen Drinks",
   "Freshly Baked Goods",
   "Coffee Beans",
+  "Soft Drinks",
   "Brewing Equipment"
 ];
 
@@ -246,6 +246,7 @@ const coffeeProducts: CoffeeProduct[] = [
     description: "Chilled americano over crushed ice",
     icon: "cup-soda"
   },
+  // Coffee Beans
   {
     id: 7,
     name: "House Blend",
@@ -262,6 +263,7 @@ const coffeeProducts: CoffeeProduct[] = [
     description: "Ethiopian beans with fruity notes",
     icon: "coffee"
   },
+  // Freshly Baked Goods
   {
     id: 14,
     name: "Plain Croissant",
@@ -303,6 +305,88 @@ const coffeeProducts: CoffeeProduct[] = [
     description: "Moist banana bread with walnuts",
     icon: "croissant"
   },
+  // Soft Drinks
+  {
+    id: 40,
+    name: "Coke 330ml",
+    price: 20,
+    category: "Soft Drinks",
+    description: "Classic cola refreshment",
+    icon: "glass-water"
+  },
+  {
+    id: 41,
+    name: "Coke Zero 330ml",
+    price: 20,
+    category: "Soft Drinks",
+    description: "Zero sugar cola refreshment",
+    icon: "glass-water"
+  },
+  {
+    id: 42,
+    name: "Sprite 330ml",
+    price: 20,
+    category: "Soft Drinks",
+    description: "Crisp lemon-lime soda",
+    icon: "glass-water"
+  },
+  {
+    id: 43,
+    name: "Sprite Zero 330ml",
+    price: 20,
+    category: "Soft Drinks",
+    description: "Zero sugar lemon-lime soda",
+    icon: "glass-water"
+  },
+  {
+    id: 44,
+    name: "Fanta 330ml",
+    price: 20,
+    category: "Soft Drinks",
+    description: "Sparkling orange flavored soda",
+    icon: "glass-water"
+  },
+  {
+    id: 45,
+    name: "Peach Iced Tea 330ml",
+    price: 25,
+    category: "Soft Drinks",
+    description: "Refreshing peach flavored iced tea",
+    icon: "glass-water"
+  },
+  {
+    id: 46,
+    name: "Lemon Iced Tea 330ml",
+    price: 25,
+    category: "Soft Drinks",
+    description: "Refreshing lemon flavored iced tea",
+    icon: "glass-water"
+  },
+  {
+    id: 47,
+    name: "Berry Iced Tea 330ml",
+    price: 25,
+    category: "Soft Drinks",
+    description: "Refreshing berry flavored iced tea",
+    icon: "glass-water"
+  },
+  {
+    id: 48,
+    name: "Redbull Original 250ml",
+    price: 35,
+    category: "Soft Drinks",
+    description: "Energy drink that gives you wings",
+    isPopular: true,
+    icon: "glass-water"
+  },
+  {
+    id: 49,
+    name: "Redbull No Sugar 250ml",
+    price: 35,
+    category: "Soft Drinks",
+    description: "Sugar-free energy drink that gives you wings",
+    icon: "glass-water"
+  },
 ];
 
 const Shop = () => {
@@ -329,6 +413,8 @@ const Shop = () => {
         return <Croissant className="h-24 w-24 text-gray-600" />;
       case "leafy-green":
         return <LeafyGreen className="h-24 w-24 text-gray-600" />;
+      case "glass-water":
+        return <GlassWater className="h-24 w-24 text-gray-600" />;
       default:
         return <Coffee className="h-24 w-24 text-gray-600" />;
     }
