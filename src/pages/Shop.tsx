@@ -370,16 +370,22 @@ const Shop = () => {
         </div>
         
         {/* Products Grid */}
-        <section className="py-8 bg-gray-50">
-          <div className="container mx-auto px-4">
+        <section className="py-8 relative before:content-[''] before:absolute before:inset-0 before:bg-black/40 before:z-0"
+          style={{ 
+            backgroundImage: "url('/lovable-uploads/b643d28e-71f1-40da-a612-2fa73f99d0ae.png')",
+            backgroundSize: "cover",
+            backgroundPosition: "center",
+            backgroundAttachment: "fixed"
+          }}>
+          <div className="container mx-auto px-4 relative z-10">
             <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-6">
               {filteredProducts.map((product) => (
                 <div 
                   key={product.id} 
-                  className="bg-white rounded-lg overflow-hidden shadow"
+                  className="bg-white/95 backdrop-blur-sm rounded-lg overflow-hidden shadow"
                 >
                   <div className="flex flex-row">
-                    <div className="w-1/3 flex items-center justify-center bg-gray-100 p-4">
+                    <div className="w-1/3 flex items-center justify-center bg-gray-100/80 p-4">
                       {renderIcon(product.icon)}
                     </div>
                     <div className="w-2/3 p-4 flex flex-col justify-between">
