@@ -49,7 +49,8 @@ const coffeeProducts: CoffeeProduct[] = [
     price: 25,
     category: "Hot Coffee",
     description: "Espresso diluted with hot water",
-    icon: "coffee"
+    icon: "coffee",
+    imageUrl: "/lovable-uploads/cf00a807-10c8-4120-92f2-5e7a5860ecbd.png"
   },
   {
     id: 21,
@@ -83,7 +84,8 @@ const coffeeProducts: CoffeeProduct[] = [
     category: "Hot Coffee",
     description: "Smooth espresso with velvety steamed milk",
     isPopular: true,
-    icon: "coffee"
+    icon: "coffee",
+    imageUrl: "/lovable-uploads/166aefbd-c046-4050-bd61-4762da43b6bc.png"
   },
   {
     id: 2,
