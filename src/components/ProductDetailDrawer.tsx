@@ -77,10 +77,12 @@ const ProductDetailDrawer = ({ product }: ProductDetailDrawerProps) => {
     <Drawer open={isOpen} onOpenChange={setIsOpen}>
       <DrawerTrigger asChild>
         <Button 
-          variant="ghost" 
-          className="w-full h-full absolute inset-0 opacity-0 cursor-pointer"
+          variant="outline" 
+          className="w-full h-full absolute inset-0 z-10"
           aria-label={`View ${product.name} details`}
-        />
+        >
+          View details
+        </Button>
       </DrawerTrigger>
       <DrawerContent className="max-h-[85vh] overflow-y-auto">
         <div className="mx-auto w-full max-w-md">
