@@ -3,11 +3,12 @@ import { useState } from 'react';
 import { Button } from "@/components/ui/button";
 import { Coffee, ShoppingCart, Menu, X } from "lucide-react";
 import { Link, useLocation } from 'react-router-dom';
+import { useCart } from "@/context/CartContext";
 
 const Header = () => {
   const [mobileMenuOpen, setMobileMenuOpen] = useState(false);
   const location = useLocation();
-  const [cartCount, setCartCount] = useState(0);
+  const { totalItems } = useCart();
 
   const isActive = (path: string) => {
     return location.pathname === path;
@@ -49,9 +50,13 @@ const Header = () => {
         </nav>
         
         <div className="flex items-center gap-4">
-          <Button variant="ghost" size="icon" className="relative" aria-label="Shopping Cart">
-            <ShoppingCart className="h-5 w-5" />
-            <span className="absolute -top-1 -right-1 bg-black text-white text-xs rounded-full h-5 w-5 flex items-center justify-center">{cartCount}</span>
+          <Button variant="ghost" size="icon" className="relative" aria-label="Shopping Cart" asChild>
+            <Link to="/checkout">
+              <ShoppingCart className="h-5 w-5" />
+              {totalItems > 0 && (
+                <span className="absolute -top-1 -right-1 bg-black text-white text-xs rounded-full h-5 w-5 flex items-center justify-center">{totalItems}</span>
+              )}
+            </Link>
           </Button>
           
           <Button className="hidden md:flex bg-black hover:bg-gray-800 text-white" asChild>

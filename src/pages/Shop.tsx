@@ -1,3 +1,4 @@
+
 import { useState } from "react";
 import { Badge } from "@/components/ui/badge";
 import { Button } from "@/components/ui/button";
@@ -5,6 +6,8 @@ import Header from "@/components/Header";
 import Footer from "@/components/Footer";
 import { ShoppingCart, Coffee, CupSoda, Croissant, LeafyGreen, GlassWater } from "lucide-react";
 import { Link } from "react-router-dom";
+import ProductDetailDrawer from "@/components/ProductDetailDrawer";
+import { useCart } from "@/context/CartContext";
 
 // Define coffee types and their categories
 type CoffeeProduct = {
@@ -396,16 +399,12 @@ const coffeeProducts: CoffeeProduct[] = [
 
 const Shop = () => {
   const [selectedCategory, setSelectedCategory] = useState("All Products");
-  const [cartItems, setCartItems] = useState<number>(0);
+  const { addToCart, totalItems } = useCart();
 
   // Filter products based on selected category
   const filteredProducts = selectedCategory === "All Products" 
     ? coffeeProducts 
     : coffeeProducts.filter(product => product.category === selectedCategory);
-
-  const addToCart = () => {
-    setCartItems(cartItems + 1);
-  };
 
   // Function to render the appropriate icon
   const renderIcon = (iconName: CoffeeProduct["icon"]) => {
@@ -473,7 +472,7 @@ const Shop = () => {
               {filteredProducts.map((product) => (
                 <div 
                   key={product.id} 
-                  className="bg-white/95 backdrop-blur-sm rounded-lg overflow-hidden shadow"
+                  className="bg-white/95 backdrop-blur-sm rounded-lg overflow-hidden shadow relative"
                 >
                   <div className="flex flex-row">
                     <div className="w-1/3 flex items-center justify-center bg-gray-100/80 p-4">
@@ -510,13 +509,22 @@ const Shop = () => {
                         <Button 
                           size="sm" 
                           className="bg-black hover:bg-gray-800"
-                          onClick={addToCart}
+                          onClick={(e) => {
+                            e.stopPropagation();
+                            addToCart(product, 1);
+                          }}
                         >
                           <ShoppingCart className="h-4 w-4" />
                         </Button>
                       </div>
                     </div>
                   </div>
+                  
+                  {/* Product Detail Drawer */}
+                  <ProductDetailDrawer 
+                    product={product} 
+                    onAddToCart={addToCart} 
+                  />
                 </div>
               ))}
             </div>
@@ -524,14 +532,14 @@ const Shop = () => {
         </section>
         
         {/* View Cart Sticky Button */}
-        {cartItems > 0 && (
+        {totalItems > 0 && (
           <div className="fixed bottom-6 left-1/2 transform -translate-x-1/2 z-50">
             <Button 
               className="bg-black hover:bg-gray-800 px-8 py-6 text-white shadow-lg"
               asChild
             >
               <Link to="/checkout">
-                View order ({cartItems} {cartItems === 1 ? 'item' : 'items'})
+                View order ({totalItems} {totalItems === 1 ? 'item' : 'items'})
               </Link>
             </Button>
           </div>
