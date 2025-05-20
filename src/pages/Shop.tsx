@@ -67,7 +67,8 @@ const coffeeProducts: CoffeeProduct[] = [
     price: 35,
     category: "Hot Coffee",
     description: "Espresso with steamed milk and a light layer of foam",
-    icon: "coffee"
+    icon: "coffee",
+    imageUrl: "/lovable-uploads/4338d845-0b50-489b-87b7-bd82420da479.png"
   },
   {
     id: 24,
