@@ -12,6 +12,7 @@ import { Button } from "@/components/ui/button";
 import { Badge } from "@/components/ui/badge";
 import { Coffee, CupSoda, Croissant, LeafyGreen, GlassWater, Plus, Minus, ShoppingCart } from "lucide-react";
 import { toast } from "@/hooks/use-toast";
+import { useCart } from "@/context/CartContext";
 
 // Import product type from the shop page
 type CoffeeProduct = {
@@ -29,12 +30,12 @@ type CoffeeProduct = {
 
 interface ProductDetailDrawerProps {
   product: CoffeeProduct;
-  onAddToCart: (product: CoffeeProduct, quantity: number) => void;
 }
 
-const ProductDetailDrawer = ({ product, onAddToCart }: ProductDetailDrawerProps) => {
+const ProductDetailDrawer = ({ product }: ProductDetailDrawerProps) => {
   const [quantity, setQuantity] = useState(1);
   const [isOpen, setIsOpen] = useState(false);
+  const { addToCart } = useCart();
 
   const increaseQuantity = () => setQuantity(prev => prev + 1);
   
@@ -45,7 +46,7 @@ const ProductDetailDrawer = ({ product, onAddToCart }: ProductDetailDrawerProps)
   };
 
   const handleAddToCart = () => {
-    onAddToCart(product, quantity);
+    addToCart(product, quantity);
     setIsOpen(false);
     setQuantity(1);
     toast({

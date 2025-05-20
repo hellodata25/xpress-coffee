@@ -1,4 +1,3 @@
-
 import { useState } from "react";
 import { Badge } from "@/components/ui/badge";
 import { Button } from "@/components/ui/button";
@@ -521,10 +520,7 @@ const Shop = () => {
                   </div>
                   
                   {/* Product Detail Drawer */}
-                  <ProductDetailDrawer 
-                    product={product} 
-                    onAddToCart={addToCart} 
-                  />
+                  <ProductDetailDrawer product={product} />
                 </div>
               ))}
             </div>
