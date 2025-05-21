@@ -1,3 +1,4 @@
+
 import { useState } from "react";
 import { Badge } from "@/components/ui/badge";
 import { Button } from "@/components/ui/button";
@@ -409,17 +410,17 @@ const Shop = () => {
   const renderIcon = (iconName: CoffeeProduct["icon"]) => {
     switch(iconName) {
       case "coffee":
-        return <Coffee className="h-24 w-24 text-gray-600" />;
+        return <Coffee className="h-20 w-20 text-gray-700" />;
       case "cup-soda":
-        return <CupSoda className="h-24 w-24 text-gray-600" />;
+        return <CupSoda className="h-20 w-20 text-gray-700" />;
       case "croissant":
-        return <Croissant className="h-24 w-24 text-gray-600" />;
+        return <Croissant className="h-20 w-20 text-gray-700" />;
       case "leafy-green":
-        return <LeafyGreen className="h-24 w-24 text-gray-600" />;
+        return <LeafyGreen className="h-20 w-20 text-gray-700" />;
       case "glass-water":
-        return <GlassWater className="h-24 w-24 text-gray-600" />;
+        return <GlassWater className="h-20 w-20 text-gray-700" />;
       default:
-        return <Coffee className="h-24 w-24 text-gray-600" />;
+        return <Coffee className="h-20 w-20 text-gray-700" />;
     }
   };
 
@@ -429,25 +430,25 @@ const Shop = () => {
       
       <main className="flex-grow">
         {/* Shop Hero Banner */}
-        <div className="bg-black text-white py-8">
+        <div className="bg-black text-white py-10">
           <div className="container mx-auto px-4">
-            <h1 className="font-serif text-3xl md:text-4xl font-bold">Coffee Shop</h1>
-            <p className="mt-2 text-gray-200 opacity-90">Discover our premium coffee selection</p>
+            <h1 className="font-serif text-4xl md:text-5xl font-bold">Coffee Shop</h1>
+            <p className="mt-3 text-lg text-gray-200 opacity-90 max-w-2xl">Discover our premium coffee selection and enjoy the finest brews and treats</p>
           </div>
         </div>
         
         {/* Categories Navigation */}
-        <div className="sticky top-16 z-40 bg-background/95 backdrop-blur-sm border-b">
+        <div className="sticky top-16 z-40 bg-background/95 backdrop-blur-sm border-b shadow-sm">
           <div className="container mx-auto px-4">
             <div className="overflow-x-auto py-4">
-              <div className="flex space-x-2 min-w-max">
+              <div className="flex space-x-3 min-w-max">
                 {categories.map((category) => (
                   <Button
                     key={category}
                     variant={selectedCategory === category ? "default" : "outline"}
                     className={selectedCategory === category 
-                      ? "bg-black text-white" 
-                      : "border-gray-300 text-gray-700"}
+                      ? "bg-black text-white font-medium rounded-xl" 
+                      : "border-gray-300 text-gray-700 hover:bg-gray-100 rounded-xl"}
                     onClick={() => setSelectedCategory(category)}
                   >
                     {category}
@@ -459,7 +460,7 @@ const Shop = () => {
         </div>
         
         {/* Products Grid */}
-        <section className="py-8 relative before:content-[''] before:absolute before:inset-0 before:bg-black/40 before:z-0"
+        <section className="py-12 relative before:content-[''] before:absolute before:inset-0 before:bg-black/40 before:z-0"
           style={{ 
             backgroundImage: "url('/lovable-uploads/b643d28e-71f1-40da-a612-2fa73f99d0ae.png')",
             backgroundSize: "cover",
@@ -467,40 +468,40 @@ const Shop = () => {
             backgroundAttachment: "fixed"
           }}>
           <div className="container mx-auto px-4 relative z-10">
-            <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-6">
+            <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-8">
               {filteredProducts.map((product) => (
                 <div 
                   key={product.id} 
-                  className="bg-white/95 backdrop-blur-sm rounded-lg overflow-hidden shadow relative"
+                  className="bg-white/95 backdrop-blur-sm rounded-xl overflow-hidden shadow-lg hover:shadow-xl transition-all duration-300 relative transform hover:-translate-y-1"
                 >
                   <div className="flex flex-row">
-                    <div className="w-1/3 flex items-center justify-center bg-gray-100/80 p-4">
+                    <div className="w-1/3 flex items-center justify-center bg-gray-100/80 p-6">
                       {product.imageUrl ? (
                         <img 
                           src={product.imageUrl} 
                           alt={product.name} 
-                          className="h-24 w-24 object-cover"
+                          className="h-28 w-28 object-cover rounded-lg"
                         />
                       ) : (
                         renderIcon(product.icon)
                       )}
                     </div>
-                    <div className="w-2/3 p-4 flex flex-col justify-between">
+                    <div className="w-2/3 p-5 flex flex-col justify-between">
                       <div>
-                        <div className="flex flex-wrap gap-2 mb-2">
+                        <div className="flex flex-wrap gap-2 mb-3">
                           {product.isPopular && (
-                            <Badge className="bg-black">Popular</Badge>
+                            <Badge className="bg-black text-white px-3 py-1 rounded-full">Popular</Badge>
                           )}
                           {product.isNew && (
-                            <Badge className="bg-blue-500">New</Badge>
+                            <Badge className="bg-blue-500 text-white px-3 py-1 rounded-full">New</Badge>
                           )}
                           {product.isVegan && (
-                            <Badge className="bg-green-500">Vegan</Badge>
+                            <Badge className="bg-green-500 text-white px-3 py-1 rounded-full">Vegan</Badge>
                           )}
                         </div>
-                        <h3 className="text-xl font-semibold">{product.name}</h3>
+                        <h3 className="text-xl font-semibold text-gray-800">{product.name}</h3>
                         {product.description && (
-                          <p className="text-sm text-gray-500 mt-1 line-clamp-2">{product.description}</p>
+                          <p className="text-sm text-gray-600 mt-2 line-clamp-2">{product.description}</p>
                         )}
                       </div>
                       <div className="mt-4">
@@ -519,12 +520,13 @@ const Shop = () => {
         
         {/* View Cart Sticky Button */}
         {totalItems > 0 && (
-          <div className="fixed bottom-6 left-1/2 transform -translate-x-1/2 z-50">
+          <div className="fixed bottom-8 left-1/2 transform -translate-x-1/2 z-50">
             <Button 
-              className="bg-black hover:bg-gray-800 px-8 py-6 text-white shadow-lg"
+              className="bg-black hover:bg-gray-800 px-8 py-6 text-white shadow-xl rounded-full"
               asChild
             >
               <Link to="/checkout">
+                <ShoppingCart className="h-5 w-5 mr-2" />
                 View order ({totalItems} {totalItems === 1 ? 'item' : 'items'})
               </Link>
             </Button>
