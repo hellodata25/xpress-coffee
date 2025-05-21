@@ -30,17 +30,17 @@ const CartItem: React.FC<CartItemProps> = ({ item }) => {
   const renderIcon = (iconName: string) => {
     switch(iconName) {
       case "coffee":
-        return <Coffee className="h-10 w-10 text-gray-700" />;
+        return <Coffee className="h-8 w-8 text-gray-700" />;
       case "cup-soda":
-        return <CupSoda className="h-10 w-10 text-gray-700" />;
+        return <CupSoda className="h-8 w-8 text-gray-700" />;
       case "croissant":
-        return <Croissant className="h-10 w-10 text-gray-700" />;
+        return <Croissant className="h-8 w-8 text-gray-700" />;
       case "leafy-green":
-        return <LeafyGreen className="h-10 w-10 text-gray-700" />;
+        return <LeafyGreen className="h-8 w-8 text-gray-700" />;
       case "glass-water":
-        return <GlassWater className="h-10 w-10 text-gray-700" />;
+        return <GlassWater className="h-8 w-8 text-gray-700" />;
       default:
-        return <Coffee className="h-10 w-10 text-gray-700" />;
+        return <Coffee className="h-8 w-8 text-gray-700" />;
     }
   };
 
@@ -49,7 +49,7 @@ const CartItem: React.FC<CartItemProps> = ({ item }) => {
       <div className="flex items-center space-x-4">
         <div className="bg-gray-100 p-2 rounded-lg flex items-center justify-center">
           {item.imageUrl ? (
-            <img src={item.imageUrl} alt={item.name} className="h-12 w-12 object-cover rounded-md" />
+            <img src={item.imageUrl} alt={item.name} className="h-10 w-10 object-cover rounded-md" />
           ) : (
             renderIcon(item.icon)
           )}
@@ -66,7 +66,7 @@ const CartItem: React.FC<CartItemProps> = ({ item }) => {
             variant="ghost" 
             size="icon" 
             onClick={handleDecreaseQuantity} 
-            className="h-8 w-8 rounded-full"
+            className="h-7 w-7 rounded-full"
             aria-label="Decrease quantity"
           >
             <Minus className="h-3 w-3" />
@@ -76,7 +76,7 @@ const CartItem: React.FC<CartItemProps> = ({ item }) => {
             variant="ghost" 
             size="icon" 
             onClick={handleIncreaseQuantity} 
-            className="h-8 w-8 rounded-full"
+            className="h-7 w-7 rounded-full"
             aria-label="Increase quantity"
           >
             <Plus className="h-3 w-3" />
@@ -84,14 +84,14 @@ const CartItem: React.FC<CartItemProps> = ({ item }) => {
         </div>
         
         <div className="font-medium">
-          R{item.price * item.quantity}
+          R{(item.price * item.quantity).toFixed(2)}
         </div>
         
         <Button
           variant="ghost"
           size="icon"
           onClick={handleRemove}
-          className="h-8 w-8 text-red-500 hover:bg-red-50 rounded-full"
+          className="h-7 w-7 text-red-500 hover:bg-red-50 rounded-full"
           aria-label="Remove item"
         >
           <Trash2 className="h-4 w-4" />

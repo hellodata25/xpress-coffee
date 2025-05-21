@@ -4,10 +4,11 @@ import { Badge } from "@/components/ui/badge";
 import { Button } from "@/components/ui/button";
 import Header from "@/components/Header";
 import Footer from "@/components/Footer";
-import { Coffee, CupSoda, Croissant, LeafyGreen, GlassWater, ShoppingCart } from "lucide-react";
+import { Coffee, CupSoda, Croissant, LeafyGreen, GlassWater, ShoppingCart, Plus, Minus } from "lucide-react";
 import { Link } from "react-router-dom";
 import ProductDetailDrawer from "@/components/ProductDetailDrawer";
 import { useCart } from "@/context/CartContext";
+import { toast } from "@/hooks/use-toast";
 
 // Define coffee types and their categories
 type CoffeeProduct = {
@@ -399,7 +400,10 @@ const coffeeProducts: CoffeeProduct[] = [
 
 const Shop = () => {
   const [selectedCategory, setSelectedCategory] = useState("All Products");
-  const { totalItems } = useCart();
+  const { totalItems, addToCart, cartItems } = useCart();
+  const [productQuantities, setProductQuantities] = useState<Record<number, number>>(
+    coffeeProducts.reduce((acc, product) => ({ ...acc, [product.id]: 1 }), {})
+  );
 
   // Filter products based on selected category
   const filteredProducts = selectedCategory === "All Products" 
@@ -410,18 +414,45 @@ const Shop = () => {
   const renderIcon = (iconName: CoffeeProduct["icon"]) => {
     switch(iconName) {
       case "coffee":
-        return <Coffee className="h-20 w-20 text-gray-700" />;
+        return <Coffee className="h-16 w-16 text-gray-700" />;
       case "cup-soda":
-        return <CupSoda className="h-20 w-20 text-gray-700" />;
+        return <CupSoda className="h-16 w-16 text-gray-700" />;
       case "croissant":
-        return <Croissant className="h-20 w-20 text-gray-700" />;
+        return <Croissant className="h-16 w-16 text-gray-700" />;
       case "leafy-green":
-        return <LeafyGreen className="h-20 w-20 text-gray-700" />;
+        return <LeafyGreen className="h-16 w-16 text-gray-700" />;
       case "glass-water":
-        return <GlassWater className="h-20 w-20 text-gray-700" />;
+        return <GlassWater className="h-16 w-16 text-gray-700" />;
       default:
-        return <Coffee className="h-20 w-20 text-gray-700" />;
+        return <Coffee className="h-16 w-16 text-gray-700" />;
     }
+  };
+
+  const increaseQuantity = (productId: number) => {
+    setProductQuantities(prev => ({
+      ...prev,
+      [productId]: (prev[productId] || 1) + 1
+    }));
+  };
+
+  const decreaseQuantity = (productId: number) => {
+    setProductQuantities(prev => ({
+      ...prev,
+      [productId]: Math.max((prev[productId] || 1) - 1, 1)
+    }));
+  };
+
+  const handleAddToCart = (product: CoffeeProduct) => {
+    const quantity = productQuantities[product.id] || 1;
+    addToCart(product, quantity);
+    toast({
+      title: `Added to cart`,
+      description: `${quantity} × ${product.name}`,
+    });
+  };
+
+  const isInCart = (productId: number) => {
+    return cartItems.some(item => item.id === productId);
   };
 
   return (
@@ -430,25 +461,25 @@ const Shop = () => {
       
       <main className="flex-grow">
         {/* Shop Hero Banner */}
-        <div className="bg-black text-white py-10">
+        <div className="bg-black text-white py-8">
           <div className="container mx-auto px-4">
-            <h1 className="font-serif text-4xl md:text-5xl font-bold">Coffee Shop</h1>
-            <p className="mt-3 text-lg text-gray-200 opacity-90 max-w-2xl">Discover our premium coffee selection and enjoy the finest brews and treats</p>
+            <h1 className="font-serif text-3xl md:text-4xl font-bold">Coffee Shop</h1>
+            <p className="mt-2 text-base text-gray-200 opacity-90 max-w-2xl">Discover our premium coffee selection and enjoy the finest brews and treats</p>
           </div>
         </div>
         
         {/* Categories Navigation */}
         <div className="sticky top-16 z-40 bg-background/95 backdrop-blur-sm border-b shadow-sm">
           <div className="container mx-auto px-4">
-            <div className="overflow-x-auto py-4">
-              <div className="flex space-x-3 min-w-max">
+            <div className="overflow-x-auto py-3">
+              <div className="flex space-x-2 min-w-max">
                 {categories.map((category) => (
                   <Button
                     key={category}
                     variant={selectedCategory === category ? "default" : "outline"}
                     className={selectedCategory === category 
-                      ? "bg-black text-white font-medium rounded-xl" 
-                      : "border-gray-300 text-gray-700 hover:bg-gray-100 rounded-xl"}
+                      ? "bg-black text-white font-medium rounded-full text-sm" 
+                      : "border-gray-300 text-gray-700 hover:bg-gray-100 rounded-full text-sm"}
                     onClick={() => setSelectedCategory(category)}
                   >
                     {category}
@@ -460,7 +491,7 @@ const Shop = () => {
         </div>
         
         {/* Products Grid */}
-        <section className="py-12 relative before:content-[''] before:absolute before:inset-0 before:bg-black/40 before:z-0"
+        <section className="py-8 relative before:content-[''] before:absolute before:inset-0 before:bg-black/40 before:z-0"
           style={{ 
             backgroundImage: "url('/lovable-uploads/b643d28e-71f1-40da-a612-2fa73f99d0ae.png')",
             backgroundSize: "cover",
@@ -468,50 +499,87 @@ const Shop = () => {
             backgroundAttachment: "fixed"
           }}>
           <div className="container mx-auto px-4 relative z-10">
-            <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-8">
+            <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-6">
               {filteredProducts.map((product) => (
                 <div 
                   key={product.id} 
                   className="bg-white/95 backdrop-blur-sm rounded-xl overflow-hidden shadow-lg hover:shadow-xl transition-all duration-300 relative transform hover:-translate-y-1"
                 >
-                  <div className="flex flex-row">
-                    <div className="w-1/3 flex items-center justify-center bg-gray-100/80 p-6">
-                      {product.imageUrl ? (
-                        <img 
-                          src={product.imageUrl} 
-                          alt={product.name} 
-                          className="h-28 w-28 object-cover rounded-lg"
-                        />
-                      ) : (
-                        renderIcon(product.icon)
-                      )}
-                    </div>
-                    <div className="w-2/3 p-5 flex flex-col justify-between">
-                      <div>
-                        <div className="flex flex-wrap gap-2 mb-3">
-                          {product.isPopular && (
-                            <Badge className="bg-black text-white px-3 py-1 rounded-full">Popular</Badge>
-                          )}
-                          {product.isNew && (
-                            <Badge className="bg-blue-500 text-white px-3 py-1 rounded-full">New</Badge>
-                          )}
-                          {product.isVegan && (
-                            <Badge className="bg-green-500 text-white px-3 py-1 rounded-full">Vegan</Badge>
-                          )}
-                        </div>
-                        <h3 className="text-xl font-semibold text-gray-800">{product.name}</h3>
-                        {product.description && (
-                          <p className="text-sm text-gray-600 mt-2 line-clamp-2">{product.description}</p>
+                  <div className="flex flex-col">
+                    <div className="flex flex-row">
+                      <div className="w-1/3 flex items-center justify-center bg-gray-100/80 p-4">
+                        {product.imageUrl ? (
+                          <img 
+                            src={product.imageUrl} 
+                            alt={product.name} 
+                            className="h-24 w-24 object-cover rounded-lg"
+                          />
+                        ) : (
+                          renderIcon(product.icon)
                         )}
                       </div>
-                      <div className="mt-4">
-                        <span className="text-xl font-bold">R{product.price}</span>
+                      <div className="w-2/3 p-4 flex flex-col justify-between">
+                        <div>
+                          <div className="flex flex-wrap gap-2 mb-2">
+                            {product.isPopular && (
+                              <Badge className="bg-black text-white px-2 py-1 rounded-full text-xs">Popular</Badge>
+                            )}
+                            {product.isNew && (
+                              <Badge className="bg-blue-500 text-white px-2 py-1 rounded-full text-xs">New</Badge>
+                            )}
+                            {product.isVegan && (
+                              <Badge className="bg-green-500 text-white px-2 py-1 rounded-full text-xs">Vegan</Badge>
+                            )}
+                          </div>
+                          <h3 className="text-lg font-semibold text-gray-800">{product.name}</h3>
+                          {product.description && (
+                            <p className="text-xs text-gray-600 mt-1 line-clamp-1">{product.description}</p>
+                          )}
+                        </div>
+                        <div className="mt-2">
+                          <span className="text-xl font-bold">R{product.price}</span>
+                        </div>
+                      </div>
+                    </div>
+
+                    <div className="p-4 border-t border-gray-100">
+                      <div className="flex items-center justify-between">
+                        <div className="flex items-center border rounded-full bg-gray-100">
+                          <Button 
+                            variant="ghost" 
+                            size="icon" 
+                            onClick={() => decreaseQuantity(product.id)}
+                            className="h-8 w-8 rounded-full"
+                          >
+                            <Minus className="h-3 w-3" />
+                          </Button>
+                          <span className="mx-3 text-sm font-medium w-5 text-center">
+                            {productQuantities[product.id] || 1}
+                          </span>
+                          <Button 
+                            variant="ghost" 
+                            size="icon" 
+                            onClick={() => increaseQuantity(product.id)}
+                            className="h-8 w-8 rounded-full"
+                          >
+                            <Plus className="h-3 w-3" />
+                          </Button>
+                        </div>
+                        
+                        <div className="flex space-x-2">
+                          <Button 
+                            onClick={() => handleAddToCart(product)}
+                            className="bg-black hover:bg-gray-800 text-white rounded-full px-4 text-sm"
+                          >
+                            <ShoppingCart className="h-4 w-4 mr-2" />
+                            Add to cart - R{product.price}
+                          </Button>
+                          
+                          <ProductDetailDrawer product={product} />
+                        </div>
                       </div>
                     </div>
                   </div>
-                  
-                  {/* Product Detail Drawer */}
-                  <ProductDetailDrawer product={product} />
                 </div>
               ))}
             </div>
@@ -522,12 +590,12 @@ const Shop = () => {
         {totalItems > 0 && (
           <div className="fixed bottom-8 left-1/2 transform -translate-x-1/2 z-50">
             <Button 
-              className="bg-black hover:bg-gray-800 px-8 py-6 text-white shadow-xl rounded-full"
+              className="bg-black hover:bg-gray-800 px-6 py-5 text-white shadow-xl rounded-full"
               asChild
             >
               <Link to="/checkout">
-                <ShoppingCart className="h-5 w-5 mr-2" />
-                View order ({totalItems} {totalItems === 1 ? 'item' : 'items'})
+                <ShoppingCart className="h-4 w-4 mr-2" />
+                View cart ({totalItems} {totalItems === 1 ? 'item' : 'items'})
               </Link>
             </Button>
           </div>
