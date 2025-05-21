@@ -3,7 +3,7 @@ import { Badge } from "@/components/ui/badge";
 import { Button } from "@/components/ui/button";
 import Header from "@/components/Header";
 import Footer from "@/components/Footer";
-import { ShoppingCart, Coffee, CupSoda, Croissant, LeafyGreen, GlassWater } from "lucide-react";
+import { Coffee, CupSoda, Croissant, LeafyGreen, GlassWater, ShoppingCart } from "lucide-react";
 import { Link } from "react-router-dom";
 import ProductDetailDrawer from "@/components/ProductDetailDrawer";
 import { useCart } from "@/context/CartContext";
@@ -398,7 +398,7 @@ const coffeeProducts: CoffeeProduct[] = [
 
 const Shop = () => {
   const [selectedCategory, setSelectedCategory] = useState("All Products");
-  const { addToCart, totalItems } = useCart();
+  const { totalItems } = useCart();
 
   // Filter products based on selected category
   const filteredProducts = selectedCategory === "All Products" 
@@ -503,18 +503,8 @@ const Shop = () => {
                           <p className="text-sm text-gray-500 mt-1 line-clamp-2">{product.description}</p>
                         )}
                       </div>
-                      <div className="flex justify-between items-center mt-4">
+                      <div className="mt-4">
                         <span className="text-xl font-bold">R{product.price}</span>
-                        <Button 
-                          size="sm" 
-                          className="bg-black hover:bg-gray-800"
-                          onClick={(e) => {
-                            e.stopPropagation();
-                            addToCart(product, 1);
-                          }}
-                        >
-                          <ShoppingCart className="h-4 w-4" />
-                        </Button>
                       </div>
                     </div>
                   </div>
