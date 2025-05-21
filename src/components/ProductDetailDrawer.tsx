@@ -78,7 +78,7 @@ const ProductDetailDrawer = ({ product }: ProductDetailDrawerProps) => {
       <DrawerTrigger asChild>
         <Button 
           variant="outline" 
-          className="w-full h-full absolute inset-0 z-10"
+          className="absolute bottom-2 right-2 z-10"
           aria-label={`View ${product.name} details`}
         >
           View details
