@@ -4,6 +4,7 @@ import { Button } from "@/components/ui/button";
 import { Coffee, CupSoda, Croissant, LeafyGreen, GlassWater, Plus, Minus, Trash2 } from "lucide-react";
 import { CartItem as CartItemType } from "@/context/CartContext";
 import { useCart } from "@/context/CartContext";
+import { Card } from "@/components/ui/card";
 
 interface CartItemProps {
   item: CartItemType;
@@ -45,59 +46,61 @@ const CartItem: React.FC<CartItemProps> = ({ item }) => {
   };
 
   return (
-    <div className="flex items-center justify-between py-3 border-b last:border-b-0">
-      <div className="flex items-center space-x-4">
-        <div className="bg-gray-100 p-2 rounded-lg flex items-center justify-center">
-          {item.imageUrl ? (
-            <img src={item.imageUrl} alt={item.name} className="h-10 w-10 object-cover rounded-md" />
-          ) : (
-            renderIcon(item.icon)
-          )}
-        </div>
-        <div>
-          <h3 className="font-medium">{item.name}</h3>
-          <p className="text-sm text-gray-500">R{item.price} each</p>
-        </div>
-      </div>
-      
-      <div className="flex items-center space-x-3">
-        <div className="flex items-center border rounded-full bg-white">
-          <Button 
-            variant="ghost" 
-            size="icon" 
-            onClick={handleDecreaseQuantity} 
-            className="h-7 w-7 rounded-full"
-            aria-label="Decrease quantity"
-          >
-            <Minus className="h-3 w-3" />
-          </Button>
-          <span className="mx-2 text-sm font-medium w-5 text-center">{item.quantity}</span>
-          <Button 
-            variant="ghost" 
-            size="icon" 
-            onClick={handleIncreaseQuantity} 
-            className="h-7 w-7 rounded-full"
-            aria-label="Increase quantity"
-          >
-            <Plus className="h-3 w-3" />
-          </Button>
+    <Card className="p-4 mb-3 bg-white/95">
+      <div className="flex items-center justify-between">
+        <div className="flex items-center space-x-4">
+          <div className="bg-gray-100 p-2 rounded-lg flex items-center justify-center">
+            {item.imageUrl ? (
+              <img src={item.imageUrl} alt={item.name} className="h-10 w-10 object-cover rounded-md" />
+            ) : (
+              renderIcon(item.icon)
+            )}
+          </div>
+          <div>
+            <h3 className="font-medium">{item.name}</h3>
+            <p className="text-sm text-gray-500">R{item.price} each</p>
+          </div>
         </div>
         
-        <div className="font-medium">
-          R{(item.price * item.quantity).toFixed(2)}
+        <div className="flex items-center space-x-3">
+          <div className="flex items-center border rounded-full bg-gray-100">
+            <Button 
+              variant="ghost" 
+              size="icon" 
+              onClick={handleDecreaseQuantity} 
+              className="h-7 w-7 rounded-full"
+              aria-label="Decrease quantity"
+            >
+              <Minus className="h-3 w-3" />
+            </Button>
+            <span className="mx-2 text-sm font-medium w-5 text-center">{item.quantity}</span>
+            <Button 
+              variant="ghost" 
+              size="icon" 
+              onClick={handleIncreaseQuantity} 
+              className="h-7 w-7 rounded-full"
+              aria-label="Increase quantity"
+            >
+              <Plus className="h-3 w-3" />
+            </Button>
+          </div>
+          
+          <div className="font-medium">
+            R{(item.price * item.quantity).toFixed(2)}
+          </div>
+          
+          <Button
+            variant="ghost"
+            size="icon"
+            onClick={handleRemove}
+            className="h-8 w-8 text-red-500 hover:bg-red-50 rounded-full"
+            aria-label="Remove item"
+          >
+            <Trash2 className="h-4 w-4" />
+          </Button>
         </div>
-        
-        <Button
-          variant="ghost"
-          size="icon"
-          onClick={handleRemove}
-          className="h-7 w-7 text-red-500 hover:bg-red-50 rounded-full"
-          aria-label="Remove item"
-        >
-          <Trash2 className="h-4 w-4" />
-        </Button>
       </div>
-    </div>
+    </Card>
   );
 };
 

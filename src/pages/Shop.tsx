@@ -1,4 +1,3 @@
-
 import { useState } from "react";
 import { Badge } from "@/components/ui/badge";
 import { Button } from "@/components/ui/button";
@@ -6,9 +5,9 @@ import Header from "@/components/Header";
 import Footer from "@/components/Footer";
 import { Coffee, CupSoda, Croissant, LeafyGreen, GlassWater, ShoppingCart, Plus, Minus } from "lucide-react";
 import { Link } from "react-router-dom";
-import ProductDetailDrawer from "@/components/ProductDetailDrawer";
 import { useCart } from "@/context/CartContext";
 import { toast } from "@/hooks/use-toast";
+import { Card, CardContent } from "@/components/ui/card";
 
 // Define coffee types and their categories
 type CoffeeProduct = {
@@ -501,72 +500,72 @@ const Shop = () => {
           <div className="container mx-auto px-4 relative z-10">
             <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-6">
               {filteredProducts.map((product) => (
-                <div 
+                <Card 
                   key={product.id} 
                   className="bg-white/95 backdrop-blur-sm rounded-xl overflow-hidden shadow-lg hover:shadow-xl transition-all duration-300 relative transform hover:-translate-y-1"
                 >
-                  <div className="flex flex-col">
-                    <div className="flex flex-row">
-                      <div className="w-1/3 flex items-center justify-center bg-gray-100/80 p-4">
-                        {product.imageUrl ? (
-                          <img 
-                            src={product.imageUrl} 
-                            alt={product.name} 
-                            className="h-24 w-24 object-cover rounded-lg"
-                          />
-                        ) : (
-                          renderIcon(product.icon)
-                        )}
-                      </div>
-                      <div className="w-2/3 p-4 flex flex-col justify-between">
-                        <div>
-                          <div className="flex flex-wrap gap-2 mb-2">
-                            {product.isPopular && (
-                              <Badge className="bg-black text-white px-2 py-1 rounded-full text-xs">Popular</Badge>
-                            )}
-                            {product.isNew && (
-                              <Badge className="bg-blue-500 text-white px-2 py-1 rounded-full text-xs">New</Badge>
-                            )}
-                            {product.isVegan && (
-                              <Badge className="bg-green-500 text-white px-2 py-1 rounded-full text-xs">Vegan</Badge>
-                            )}
-                          </div>
-                          <h3 className="text-lg font-semibold text-gray-800">{product.name}</h3>
-                          {product.description && (
-                            <p className="text-xs text-gray-600 mt-1 line-clamp-1">{product.description}</p>
+                  <CardContent className="p-0">
+                    <div className="flex flex-col">
+                      <div className="flex flex-row">
+                        <div className="w-1/3 flex items-center justify-center bg-gray-100/80 p-4">
+                          {product.imageUrl ? (
+                            <img 
+                              src={product.imageUrl} 
+                              alt={product.name} 
+                              className="h-24 w-24 object-cover rounded-lg"
+                            />
+                          ) : (
+                            renderIcon(product.icon)
                           )}
                         </div>
-                        <div className="mt-2">
-                          <span className="text-xl font-bold">R{product.price}</span>
+                        <div className="w-2/3 p-4 flex flex-col justify-between">
+                          <div>
+                            <div className="flex flex-wrap gap-2 mb-2">
+                              {product.isPopular && (
+                                <Badge className="bg-black text-white px-2 py-1 rounded-full text-xs">Popular</Badge>
+                              )}
+                              {product.isNew && (
+                                <Badge className="bg-blue-500 text-white px-2 py-1 rounded-full text-xs">New</Badge>
+                              )}
+                              {product.isVegan && (
+                                <Badge className="bg-green-500 text-white px-2 py-1 rounded-full text-xs">Vegan</Badge>
+                              )}
+                            </div>
+                            <h3 className="text-lg font-semibold text-gray-800">{product.name}</h3>
+                            {product.description && (
+                              <p className="text-xs text-gray-600 mt-1 line-clamp-2">{product.description}</p>
+                            )}
+                          </div>
+                          <div className="mt-2">
+                            <span className="text-xl font-bold">R{product.price}</span>
+                          </div>
                         </div>
                       </div>
-                    </div>
 
-                    <div className="p-4 border-t border-gray-100">
-                      <div className="flex items-center justify-between">
-                        <div className="flex items-center border rounded-full bg-gray-100">
-                          <Button 
-                            variant="ghost" 
-                            size="icon" 
-                            onClick={() => decreaseQuantity(product.id)}
-                            className="h-8 w-8 rounded-full"
-                          >
-                            <Minus className="h-3 w-3" />
-                          </Button>
-                          <span className="mx-3 text-sm font-medium w-5 text-center">
-                            {productQuantities[product.id] || 1}
-                          </span>
-                          <Button 
-                            variant="ghost" 
-                            size="icon" 
-                            onClick={() => increaseQuantity(product.id)}
-                            className="h-8 w-8 rounded-full"
-                          >
-                            <Plus className="h-3 w-3" />
-                          </Button>
-                        </div>
-                        
-                        <div className="flex space-x-2">
+                      <div className="p-4 border-t border-gray-100">
+                        <div className="flex items-center justify-between">
+                          <div className="flex items-center border rounded-full bg-gray-100">
+                            <Button 
+                              variant="ghost" 
+                              size="icon" 
+                              onClick={() => decreaseQuantity(product.id)}
+                              className="h-8 w-8 rounded-full"
+                            >
+                              <Minus className="h-3 w-3" />
+                            </Button>
+                            <span className="mx-3 text-sm font-medium w-5 text-center">
+                              {productQuantities[product.id] || 1}
+                            </span>
+                            <Button 
+                              variant="ghost" 
+                              size="icon" 
+                              onClick={() => increaseQuantity(product.id)}
+                              className="h-8 w-8 rounded-full"
+                            >
+                              <Plus className="h-3 w-3" />
+                            </Button>
+                          </div>
+                          
                           <Button 
                             onClick={() => handleAddToCart(product)}
                             className="bg-black hover:bg-gray-800 text-white rounded-full px-4 text-sm"
@@ -574,13 +573,11 @@ const Shop = () => {
                             <ShoppingCart className="h-4 w-4 mr-2" />
                             Add to cart - R{product.price}
                           </Button>
-                          
-                          <ProductDetailDrawer product={product} />
                         </div>
                       </div>
                     </div>
-                  </div>
-                </div>
+                  </CardContent>
+                </Card>
               ))}
             </div>
           </div>
