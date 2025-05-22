@@ -1,8 +1,7 @@
 
-import { useState } from "react";
+import { useState, useEffect } from "react";
 import { 
   Drawer, 
-  DrawerTrigger, 
   DrawerContent, 
   DrawerHeader,
   DrawerTitle, 
@@ -31,14 +30,20 @@ type CoffeeProduct = {
 
 interface ProductDetailDrawerProps {
   product: CoffeeProduct;
+  isOpen: boolean;
+  onOpenChange: (open: boolean) => void;
 }
 
-const ProductDetailDrawer = ({ product }: ProductDetailDrawerProps) => {
+const ProductDetailDrawer = ({ product, isOpen, onOpenChange }: ProductDetailDrawerProps) => {
   const [quantity, setQuantity] = useState(1);
-  const [isOpen, setIsOpen] = useState(false);
   const { addToCart, cartItems } = useCart();
 
   const isInCart = cartItems.some(item => item.id === product.id);
+
+  // Reset quantity when product changes
+  useEffect(() => {
+    setQuantity(1);
+  }, [product.id]);
 
   const increaseQuantity = () => setQuantity(prev => prev + 1);
   
@@ -50,8 +55,7 @@ const ProductDetailDrawer = ({ product }: ProductDetailDrawerProps) => {
 
   const handleAddToCart = () => {
     addToCart(product, quantity);
-    setIsOpen(false);
-    setQuantity(1);
+    onOpenChange(false);
     toast({
       title: `Added to cart`,
       description: `${quantity} × ${product.name}`,
@@ -77,16 +81,7 @@ const ProductDetailDrawer = ({ product }: ProductDetailDrawerProps) => {
   };
 
   return (
-    <Drawer open={isOpen} onOpenChange={setIsOpen}>
-      <DrawerTrigger asChild>
-        <Button 
-          variant="outline" 
-          className="absolute bottom-4 right-4 z-10 bg-white hover:bg-gray-50 shadow-md rounded-full text-sm font-medium px-4 py-2 border-gray-200 transition-all duration-200 hover:scale-105"
-          aria-label={`View ${product.name} details`}
-        >
-          View details
-        </Button>
-      </DrawerTrigger>
+    <Drawer open={isOpen} onOpenChange={onOpenChange}>
       <DrawerContent className="max-h-[85vh] overflow-y-auto">
         <div className="mx-auto w-full max-w-md">
           <DrawerHeader>

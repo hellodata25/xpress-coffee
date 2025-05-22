@@ -1,3 +1,4 @@
+
 import { useState } from "react";
 import { Badge } from "@/components/ui/badge";
 import { Button } from "@/components/ui/button";
@@ -8,6 +9,7 @@ import { Link } from "react-router-dom";
 import { useCart } from "@/context/CartContext";
 import { toast } from "@/hooks/use-toast";
 import { Card, CardContent } from "@/components/ui/card";
+import ProductDetailDrawer from "@/components/ProductDetailDrawer";
 
 // Define coffee types and their categories
 type CoffeeProduct = {
@@ -403,6 +405,8 @@ const Shop = () => {
   const [productQuantities, setProductQuantities] = useState<Record<number, number>>(
     coffeeProducts.reduce((acc, product) => ({ ...acc, [product.id]: 1 }), {})
   );
+  const [selectedProduct, setSelectedProduct] = useState<CoffeeProduct | null>(null);
+  const [isDrawerOpen, setIsDrawerOpen] = useState(false);
 
   // Filter products based on selected category
   const filteredProducts = selectedCategory === "All Products" 
@@ -448,6 +452,11 @@ const Shop = () => {
       title: `Added to cart`,
       description: `${quantity} × ${product.name}`,
     });
+  };
+
+  const openProductDetail = (product: CoffeeProduct) => {
+    setSelectedProduct(product);
+    setIsDrawerOpen(true);
   };
 
   const isInCart = (productId: number) => {
@@ -506,7 +515,10 @@ const Shop = () => {
                 >
                   <CardContent className="p-0">
                     <div className="flex flex-col">
-                      <div className="flex flex-row">
+                      <div 
+                        className="flex flex-row cursor-pointer" 
+                        onClick={() => openProductDetail(product)}
+                      >
                         <div className="w-1/3 flex items-center justify-center bg-gray-100/80 p-4">
                           {product.imageUrl ? (
                             <img 
@@ -548,7 +560,10 @@ const Shop = () => {
                             <Button 
                               variant="ghost" 
                               size="icon" 
-                              onClick={() => decreaseQuantity(product.id)}
+                              onClick={(e) => {
+                                e.stopPropagation();
+                                decreaseQuantity(product.id);
+                              }}
                               className="h-8 w-8 rounded-full"
                             >
                               <Minus className="h-3 w-3" />
@@ -559,7 +574,10 @@ const Shop = () => {
                             <Button 
                               variant="ghost" 
                               size="icon" 
-                              onClick={() => increaseQuantity(product.id)}
+                              onClick={(e) => {
+                                e.stopPropagation();
+                                increaseQuantity(product.id);
+                              }}
                               className="h-8 w-8 rounded-full"
                             >
                               <Plus className="h-3 w-3" />
@@ -567,7 +585,10 @@ const Shop = () => {
                           </div>
                           
                           <Button 
-                            onClick={() => handleAddToCart(product)}
+                            onClick={(e) => {
+                              e.stopPropagation();
+                              handleAddToCart(product);
+                            }}
                             className="bg-black hover:bg-gray-800 text-white rounded-full px-4 text-sm"
                           >
                             <ShoppingCart className="h-4 w-4 mr-2" />
@@ -582,6 +603,15 @@ const Shop = () => {
             </div>
           </div>
         </section>
+        
+        {/* Product Detail Drawer */}
+        {selectedProduct && (
+          <ProductDetailDrawer 
+            product={selectedProduct} 
+            isOpen={isDrawerOpen} 
+            onOpenChange={setIsDrawerOpen}
+          />
+        )}
         
         {/* View Cart Sticky Button */}
         {totalItems > 0 && (
